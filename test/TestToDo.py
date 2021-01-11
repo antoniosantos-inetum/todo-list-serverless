@@ -44,7 +44,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         
         self.dynamodb = None
 
-    def test_table_exists(self):
+    def test_0_table_exists(self):
         self.assertTrue(self.table)  # check if we got a result
         self.assertTrue(self.table_local)  # check if we got a result
 
@@ -57,7 +57,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertIn('todoTablelocal', self.table_b.name)
         # pprint(self.table.name)
 
-    def test_put_todo(self):
+    def test_1_put_todo(self):
         # Testing file functions        
         from ToDoPutItem import put_todo
         ## Table local  
@@ -71,7 +71,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         ## Table b mock
         self.assertEqual(200, self.table_handler_b.put_todo(self.text, self.uuid, self.dynamodb)['ResponseMetadata']['HTTPStatusCode'])
 
-    def test_put_todo_error(self):
+    def test_2_put_todo_error(self):
         # Testing file functions
         from ToDoPutItem import put_todo
         ## Table local 
@@ -92,7 +92,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(Exception, self.table_handler_b.put_todo("", "", self.dynamodb))
         self.assertRaises(Exception, self.table_handler_b.put_todo(self.text, "", self.dynamodb))
 
-    def test_get_todo(self):
+    def test_3_get_todo(self):
         from ToDoGetItem import get_todo
         from ToDoPutItem import put_todo
         
@@ -118,7 +118,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertEqual(200, self.table_handler_b.get_todo(self.uuid, self.dynamodb)['ResponseMetadata']['HTTPStatusCode'])
         self.assertEqual(self.text, self.table_handler_b.get_todo(self.uuid, self.dynamodb)['Item']['text'])
 
-    def test_get_todo_error(self):
+    def test_4_get_todo_error(self):
         from ToDoPutItem import put_todo
         from ToDoGetItem import get_todo
         # Testing file functions
@@ -136,7 +136,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.table_handler_b.put_todo(self.text,self.uuid, self.dynamodb)
         self.assertRaises(TypeError, self.table_handler_b.get_todo("", self.dynamodb))
 
-    def test_update_todo(self):
+    def test_5_update_todo(self):
         from ToDoPutItem import put_todo
         from ToDoUpdateItem import update_todo
         from ToDoGetItem import get_todo
@@ -160,7 +160,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertEqual(200, self.table_handler_b.update_todo(updated_text,self.uuid,"false", self.dynamodb)['ResponseMetadata']['HTTPStatusCode'])
         self.assertEqual(updated_text, self.table_handler_b.get_todo(self.uuid, self.dynamodb)['Item']['text'])
 
-    def test_update_todo_error(self):
+    def test_6_update_todo_error(self):
         from ToDoPutItem import put_todo
         from ToDoUpdateItem import update_todo
         updated_text = "Aprender más cosas que DevOps y Cloud en la UNIR"
@@ -187,7 +187,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(TypeError, self.table_handler_b.update_todo("", self.uuid,"false", self.dynamodb))
         self.assertRaises(Exception, self.table_handler_b.update_todo(updated_text,self.uuid,"", self.dynamodb))
     
-    def test_delete_todo(self):
+    def test_7_delete_todo(self):
         from ToDoDeleteItem import delete_todo
         from ToDoPutItem import put_todo
         from ToDoGetItem import get_todo
@@ -213,7 +213,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertEqual(200, self.table_handler_b.delete_todo(self.uuid, self.dynamodb)['ResponseMetadata']['HTTPStatusCode'])
         # self.assertEqual(self.text, self.table_handler_b.get_todo(self.uuid, self.dynamodb)['Item']['text'])    
     
-    def test_python_files(self):
+    def test_8_python_files(self):
         import ToDoPutItem 
         import ToDoGetItem
         import ToDoUpdateItem
