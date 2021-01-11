@@ -1,0 +1,7 @@
+boto3
+moto
+flake8
+flake8-polyfill
+radon
+bandit
+coverage
