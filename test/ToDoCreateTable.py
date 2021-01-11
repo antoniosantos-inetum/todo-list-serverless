@@ -27,8 +27,8 @@ def create_todo_table(dynamodb=None):
 
     # Wait until the table exists.
     table.meta.client.get_waiter('table_exists').wait(TableName='todoTable')
-    if (table.table_status != 'ACTIVE'):
-        raise AssertionError()
+    #if (table.table_status != 'ACTIVE'):
+    #    raise AssertionError()
 
     return table
 

@@ -22,7 +22,8 @@ def put_todo(text, id, dynamodb=None):
         })
     
     except ClientError as e:
-        print(e.response['Error']['Message'])
+        #print(e.response['Error']['Message'])
+        pass
     else:
         return response
 
